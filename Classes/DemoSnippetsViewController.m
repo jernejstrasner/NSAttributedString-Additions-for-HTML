@@ -11,12 +11,20 @@
 
 #import "DTAttributedTextContentView.h"
 
+@interface DemoSnippetsViewController (Private)
+
+- (DTAttributedTextContentView *)contentViewForIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
 @implementation DemoSnippetsViewController
 
 #pragma mark NSObject
 
 - (id)init {
-	if ((self = [super initWithStyle:UITableViewStylePlain])) {
+	self = [super initWithStyle:UITableViewStylePlain];
+	if (self) {
 		self.title = @"Snippets";
 		self.tabBarItem.image = [UIImage imageNamed:@"snippets.png"];
 	}
@@ -54,44 +62,12 @@
 }
 
 
-- (DTAttributedTextContentView *)contentViewForIndexPath:(NSIndexPath *)indexPath
-{
-	if (!contentViewCache)
-	{
-		contentViewCache = [[NSMutableDictionary alloc] init];
-	}
-	
-	DTAttributedTextContentView *contentView = (id)[contentViewCache objectForKey:indexPath];
-	
-	if (!contentView)
-	{
-		NSDictionary *snippet = [_snippets objectAtIndex:indexPath.row];
-		
-		NSString *title = [snippet objectForKey:@"Title"];
-		NSString *description = [snippet objectForKey:@"Description"];
-
-		NSString *html = [NSString stringWithFormat:@"<h3>%@</h3><p><font color=\"gray\">%@</font></p>", title, description];
-		NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
-		NSAttributedString *string = [[[NSAttributedString alloc] initWithHTML:data documentAttributes:NULL] autorelease];
-		
-		// set width, height is calculated later from text
-		CGFloat width = self.view.frame.size.width;
-        [DTAttributedTextContentView setLayerClass:nil];
-		contentView = [[[DTAttributedTextContentView alloc] initWithAttributedString:string width:width - 20.0] autorelease];
-		
-		contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        contentView.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
-		[contentViewCache setObject:contentView forKey:indexPath];
-	}
-	
-	return contentView;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	DTAttributedTextContentView *contentView = [self contentViewForIndexPath:indexPath];
 	
 	return contentView.bounds.size.height+1; // for unknown reason 1 needs to be added
+	// -> The reason is the cell separator which is 1px tall and is included in the cell height
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,9 +90,6 @@
     return cell;
 }
 
-
-
-
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -125,10 +98,45 @@
 	
 	DemoTextViewController *viewController = [[DemoTextViewController alloc] init];
 	viewController.fileName = [rowSnippet objectForKey:@"File"];
-	viewController.baseURL = [NSURL URLWithString:[rowSnippet  objectForKey:@"BaseURL"]];
+	viewController.baseURL = [NSURL URLWithString:[rowSnippet objectForKey:@"BaseURL"]];
 	
 	[self.navigationController pushViewController:viewController animated:YES];
 	[viewController release];
+}
+
+#pragma mark Utility methods
+
+- (DTAttributedTextContentView *)contentViewForIndexPath:(NSIndexPath *)indexPath
+{
+	if (!contentViewCache)
+	{
+		contentViewCache = [[NSMutableDictionary alloc] init];
+	}
+	
+	DTAttributedTextContentView *contentView = (id)[contentViewCache objectForKey:indexPath];
+	
+	if (!contentView)
+	{
+		NSDictionary *snippet = [_snippets objectAtIndex:indexPath.row];
+		
+		NSString *title = [snippet objectForKey:@"Title"];
+		NSString *description = [snippet objectForKey:@"Description"];
+		
+		NSString *html = [NSString stringWithFormat:@"<h3>%@</h3><p><font color=\"gray\">%@</font></p>", title, description];
+		NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
+		NSAttributedString *string = [[[NSAttributedString alloc] initWithHTML:data documentAttributes:NULL] autorelease];
+		
+		// set width, height is calculated later from text
+		CGFloat width = self.view.frame.size.width;
+        [DTAttributedTextContentView setLayerClass:nil];
+		contentView = [[[DTAttributedTextContentView alloc] initWithAttributedString:string width:width - 20.0] autorelease];
+		
+		contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        contentView.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+		[contentViewCache setObject:contentView forKey:indexPath];
+	}
+	
+	return contentView;
 }
 
 @end

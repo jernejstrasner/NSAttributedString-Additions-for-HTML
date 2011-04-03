@@ -11,7 +11,6 @@
 
 @interface DemoTextViewController : UIViewController <UIActionSheetDelegate, DTAttributedTextContentViewDelegate>
 {
-
 	NSString *_fileName;
 	
 	UISegmentedControl *_segmentedControl;
@@ -22,16 +21,13 @@
 
 	NSURL *baseURL;
 	
-	// private
+	@private
 	NSURL *lastActionLink;
 	NSMutableSet *mediaPlayers;
 }
 
 @property (nonatomic, retain) NSString *fileName;
-
 @property (nonatomic, retain) NSURL *lastActionLink;
-
 @property (nonatomic, retain) NSURL *baseURL;
-
 
 @end

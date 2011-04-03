@@ -34,11 +34,9 @@
 #pragma mark NSObject
 
 - (id)init {
-	if ((self = [super init])) {
-		NSArray *items = [[NSArray alloc] initWithObjects:@"View", @"Ranges", @"Chars", @"Data", nil];
-		_segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
-		[items release];
-		
+	self = [super init];
+	if (self) {
+		_segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"View", @"Ranges", @"Chars", @"Data", nil]];
 		_segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
 		_segmentedControl.selectedSegmentIndex = 0;
 		[_segmentedControl addTarget:self action:@selector(_segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
@@ -47,8 +45,7 @@
 		// toolbar
 		UIBarButtonItem *spacer = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
 		UIBarButtonItem *debug = [[[UIBarButtonItem alloc] initWithTitle:@"Debug Frames" style:UIBarButtonItemStyleBordered target:self action:@selector(debugButton:)] autorelease];
-		NSArray *toolbarItems = [NSArray arrayWithObjects:spacer, debug, nil];
-		[self setToolbarItems:toolbarItems];
+		[self setToolbarItems:[NSArray arrayWithObjects:spacer, debug, nil]];
 	}
 	return self;
 }
@@ -57,14 +54,15 @@
 - (void)dealloc 
 {
 	[_fileName release];
+	[lastActionLink release];
+	[baseURL release];
+	
 	[_segmentedControl release];
 	[_textView release];
 	[_rangeView release];
 	[_charsView release];
 	[_dataView release];
-	[baseURL release];
 	
-	[lastActionLink release];
 	[mediaPlayers release];
     
 	[super dealloc];
@@ -78,8 +76,18 @@
 
 #pragma mark UIViewController
 
-- (void)loadView {
-	[super loadView];
+//- (void)loadView {
+////	[super loadView];
+////	From the docs:
+////	"If you override this method in order to create your views manually, you should do so and
+////	assign the root view of your hierarchy to the view property.
+////	(The views you create should be unique instances and should not be shared
+////	with any other view controller object.) Your custom implementation of this method
+////	should not call super.
+//}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 	
 	CGRect frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 	
@@ -107,12 +115,7 @@
 	_textView.textDelegate = self;
 	_textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	[self.view addSubview:_textView];
-}
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
 	// Load HTML data
 	NSString *readmePath = [[NSBundle mainBundle] pathForResource:_fileName ofType:nil];
 	NSString *html = [NSString stringWithContentsOfFile:readmePath encoding:NSUTF8StringEncoding error:NULL];
@@ -134,6 +137,14 @@
     [string release];
 }
 
+- (void)viewDidUnload {
+	[super viewDidUnload];
+	
+	[_dataView release], _dataView = nil;
+	[_charsView release], _charsView = nil;
+	[_rangeView release], _rangeView = nil;
+	[_textView release], _textView = nil;
+}
 
 - (void)viewWillAppear:(BOOL)animated 
 {
@@ -321,8 +332,7 @@
 
 - (NSMutableSet *)mediaPlayers
 {
-	if (!mediaPlayers)
-	{
+	if (!mediaPlayers) {
 		mediaPlayers = [[NSMutableSet alloc] init];
 	}
 	

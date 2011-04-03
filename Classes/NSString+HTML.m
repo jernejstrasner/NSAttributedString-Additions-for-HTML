@@ -40,6 +40,7 @@ static NSDictionary *entityLookup = nil;
     
     // reserve buffer, probably shorter, but +1 if it's same size + '\0'
     char *buf = malloc(strlen(string)+1);
+	if (buf == NULL) return nil; // Memory allocation failed
     
     char oneChar;
     char *inPos = (char *)string;

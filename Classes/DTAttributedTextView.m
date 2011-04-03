@@ -24,9 +24,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    
-	if (self)
-	{
+	if (self) {
 		[self setup];
 	}
 	
@@ -35,6 +33,7 @@
 
 - (void)dealloc 
 {
+	[backgroundView release];
 	[contentView release];
     [super dealloc];
 }
@@ -42,11 +41,8 @@
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
-	
-    if (!contentView)
-    {
-        [self addSubview:self.contentView];
-    }
+
+	[self contentView];
 }
 
 - (void)awakeFromNib
@@ -96,7 +92,7 @@
 
 - (void)setBackgroundColor:(UIColor *)newColor
 {
-	if ([newColor alpha]<1.0)
+	if ([newColor alpha] < 1.0)
 	{
 		super.backgroundColor = newColor;
 		contentView.backgroundColor = [UIColor clearColor];
@@ -107,8 +103,7 @@
 	{
 		super.backgroundColor = newColor;
 		
-		if (contentView.opaque)
-		{
+		if (contentView.opaque) {
 			contentView.backgroundColor = newColor;
 		}
 	}
@@ -137,22 +132,19 @@
 	if (backgroundView != newBackgroundView)
 	{
 		[backgroundView removeFromSuperview];
-		backgroundView = newBackgroundView;
-		
-		[self insertSubview:backgroundView belowSubview:self.contentView];
-		
-		if (backgroundView)
-		{
+		[backgroundView release];
+
+		if (!backgroundView) {
+			backgroundView = nil;
+			contentView.backgroundColor = [UIColor whiteColor];
+			contentView.opaque = YES;
+		} else {
+			backgroundView = [newBackgroundView retain];
+			[self insertSubview:backgroundView belowSubview:self.contentView];
 			// make content transparent so that we see the background
 			contentView.backgroundColor = [UIColor clearColor];
 			contentView.opaque = NO;
 		}
-		else 
-		{
-			contentView.backgroundColor = [UIColor whiteColor];
-			contentView.opaque = YES;
-		}
-		
 	}
 }
 
