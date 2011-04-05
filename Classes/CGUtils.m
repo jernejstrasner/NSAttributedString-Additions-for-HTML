@@ -11,20 +11,88 @@
 
 CGPathRef newPathForRoundedRect(CGRect rect, CGFloat cornerRadius, BOOL roundTopCorners, BOOL roundBottomCorners)
 {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_3_2
+	// Compatible with iOS before 3.2
+	
+	CGMutablePathRef retPath = CGPathCreateMutable();
+	
+	CGRect innerRect = CGRectInset(rect, cornerRadius, cornerRadius);
+	
+	CGFloat inside_right = innerRect.origin.x + innerRect.size.width;
+	CGFloat outside_right = rect.origin.x + rect.size.width;
+	CGFloat inside_bottom = innerRect.origin.y + innerRect.size.height;
+	CGFloat outside_bottom = rect.origin.y + rect.size.height;
+	
+	CGFloat inside_top = innerRect.origin.y;
+	CGFloat outside_top = rect.origin.y;
+	CGFloat outside_left = rect.origin.x;
+	
+	
+	if (roundTopCorners)
+	{
+		CGPathMoveToPoint(retPath, NULL, innerRect.origin.x, outside_top);
+		CGPathAddLineToPoint(retPath, NULL, inside_right, outside_top);
+		
+		CGPathAddArcToPoint(retPath, NULL, outside_right, outside_top, outside_right, inside_top, cornerRadius);	
+	}
+	else 
+	{
+		CGPathMoveToPoint(retPath, NULL, outside_left, outside_top);
+		CGPathAddLineToPoint(retPath, NULL, outside_right, outside_top);
+	}
+	
+	if (roundBottomCorners)
+	{
+		CGPathAddLineToPoint(retPath, NULL, outside_right, inside_bottom);
+		CGPathAddArcToPoint(retPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, cornerRadius);
+		
+		CGPathAddLineToPoint(retPath, NULL, innerRect.origin.x, outside_bottom);
+		CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, cornerRadius);
+	}
+	else 
+	{
+		CGPathAddLineToPoint(retPath, NULL, outside_right, outside_bottom);
+		CGPathAddLineToPoint(retPath, NULL, outside_left, outside_bottom);
+	}
+	
+	
+	
+	if (roundTopCorners)
+	{
+		CGPathAddLineToPoint(retPath, NULL, outside_left, inside_top);
+		CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, cornerRadius);
+	}
+	else 
+	{
+		CGPathAddLineToPoint(retPath, NULL, rect.origin.x, outside_top);
+	}
+	
+	
+	CGPathCloseSubpath(retPath);
+#else
 	UIRectCorner cornersToRound;
-	if (roundTopCorners && roundBottomCorners) {
+	if (roundTopCorners && roundBottomCorners)
+	{
 		cornersToRound = UIRectCornerAllCorners;
-	} else if (roundTopCorners) {
+	}
+	else if (roundTopCorners)
+	{
 		cornersToRound = UIRectCornerTopLeft | UIRectCornerTopRight;
-	} else if (roundBottomCorners) {
+	}
+	else if (roundBottomCorners)
+	{
 		cornersToRound = UIRectCornerBottomLeft | UIRectCornerBottomRight;
-	} else {
+	}
+	else
+	{
 		return [[UIBezierPath bezierPathWithRect:rect] CGPath];
 	}
 	
 	UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:cornersToRound cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
-	
-	return CGPathRetain([bezierPath CGPath]);
+	CGPathRef retPath = CGPathRetain([bezierPath CGPath]);
+#endif
+
+	return retPath;
 }
 
 CGSize sizeThatFitsKeepingAspectRatio(CGSize originalSize, CGSize sizeToFit)

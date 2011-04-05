@@ -103,7 +103,8 @@
 	{
 		super.backgroundColor = newColor;
 		
-		if (contentView.opaque) {
+		if (contentView.opaque)
+		{
 			contentView.backgroundColor = newColor;
 		}
 	}
@@ -134,11 +135,14 @@
 		[backgroundView removeFromSuperview];
 		[backgroundView release];
 
-		if (!backgroundView) {
+		if (!backgroundView)
+		{
 			backgroundView = nil;
 			contentView.backgroundColor = [UIColor whiteColor];
 			contentView.opaque = YES;
-		} else {
+		}
+		else
+		{
 			backgroundView = [newBackgroundView retain];
 			[self insertSubview:backgroundView belowSubview:self.contentView];
 			// make content transparent so that we see the background
