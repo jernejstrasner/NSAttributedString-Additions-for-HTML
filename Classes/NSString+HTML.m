@@ -33,32 +33,41 @@ static NSDictionary *entityLookup = nil;
 	return [inlineTags containsObject:[self lowercaseString]];
 }
 
+- (BOOL)isNumeric
+{
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:self];
+
+    return [[NSCharacterSet decimalDigitCharacterSet] isSupersetOfSet:characterSet];
+}
+
 - (NSString *)stringByNormalizingWhitespace
 {
-    // get c string
-    const char *string = [self UTF8String];
+    NSInteger stringLength = [self length];
     
-    // reserve buffer, probably shorter, but +1 if it's same size + '\0'
-    char *buf = malloc(strlen(string)+1);
+    // reserve buffer, same size as input
+    unichar *buf = malloc((stringLength) * sizeof(unichar));
 	if (buf == NULL) return nil; // Memory allocation failed
     
-    char oneChar;
-    char *inPos = (char *)string;
-    char *outPos = buf;
-    
-    const char *whitespaceChars = " \x0A\x0B\x0C\x0D \t\x85";
-    
+    NSInteger outputLength = 0;
     BOOL inWhite = NO;
-    
-    while ((oneChar = *inPos)) 
+   
+    for (NSInteger i = 0; i<stringLength; i++)
     {
+        unichar oneChar = [self characterAtIndex:i];
+        
         // of whitespace chars only output one space for first
-        if (strchr(whitespaceChars, *inPos))
+        if (oneChar == 32 ||    // space
+            oneChar == 10 ||    // various newlines
+            oneChar == 11 ||
+            oneChar == 12 ||
+            oneChar == 13 ||
+            oneChar == (unichar)'\t' || // tab
+            oneChar == (unichar)'\x85')
         {
             if (!inWhite)
             {
-                *outPos = ' ';
-                outPos++;
+                buf[outputLength] = 32;
+                outputLength++;
                 
                 inWhite = YES;
             }
@@ -66,21 +75,17 @@ static NSDictionary *entityLookup = nil;
         else
         {
             // all other characters we simply copy
-            *outPos = *inPos;
-            outPos++;
+            buf[outputLength] = oneChar;
+            outputLength++;
             
             inWhite = NO;
         }
-        
-        inPos++;
     }
     
-    // zero terminate output
-    *outPos = '\0';
-    
     // convert to objC-String
-    NSString *retString = [NSString stringWithUTF8String:buf];
-    
+    NSString *retString = [NSString stringWithCharacters:buf length:outputLength];
+
+    // free buffers
     free(buf);
     
     return retString;

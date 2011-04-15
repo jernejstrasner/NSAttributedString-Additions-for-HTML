@@ -105,3 +105,9 @@ CGSize sizeThatFitsKeepingAspectRatio(CGSize originalSize, CGSize sizeToFit)
 	CGSize scaledSize = CGSizeMake(roundf(originalSize.width*smallerZoom), roundf(originalSize.height*smallerZoom));
 	return scaledSize;
 }
+
+
+CGPoint CGRectCenter(CGRect rect)
+{
+    return (CGPoint){ CGRectGetMidX(rect), CGRectGetMidY(rect) };
+}

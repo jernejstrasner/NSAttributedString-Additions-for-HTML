@@ -82,6 +82,16 @@
 		A7EA581412E0C9010045411B /* DTTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EA581312E0C9010045411B /* DTTextAttachment.m */; };
 		A7EA585712E0CE130045411B /* Image.html in Resources */ = {isa = PBXBuildFile; fileRef = A7EA585612E0CE130045411B /* Image.html */; };
 		A7EA5FB012E1AC7F0045411B /* CurrentTest.html in Resources */ = {isa = PBXBuildFile; fileRef = A7EA5FAF12E1AC7F0045411B /* CurrentTest.html */; };
+		A7F2A7391356F2E30097BF31 /* XB Niloofar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7F2A7381356F2E30097BF31 /* XB Niloofar.ttf */; };
+		A7F2A73B1356F3950097BF31 /* CustomFont.html in Resources */ = {isa = PBXBuildFile; fileRef = A7F2A73A1356F3950097BF31 /* CustomFont.html */; };
+		A7F2A73C1356F4F30097BF31 /* CustomFont.html in Resources */ = {isa = PBXBuildFile; fileRef = A7F2A73A1356F3950097BF31 /* CustomFont.html */; };
+		A7F2A7401356F5720097BF31 /* XB NiloofarBd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7F2A73D1356F5720097BF31 /* XB NiloofarBd.ttf */; };
+		A7F2A74513571E820097BF31 /* DTCoreTextParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A74413571E820097BF31 /* DTCoreTextParagraphStyle.m */; };
+		A7F2A74613571E820097BF31 /* DTCoreTextParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A74413571E820097BF31 /* DTCoreTextParagraphStyle.m */; };
+		A7F2A7491357227C0097BF31 /* DTHTMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A7481357227C0097BF31 /* DTHTMLElement.m */; };
+		A7F2A74A1357227C0097BF31 /* DTHTMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A7481357227C0097BF31 /* DTHTMLElement.m */; };
+		A7F2A77513575E710097BF31 /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A77413575E700097BF31 /* NSMutableAttributedString+HTML.m */; };
+		A7F2A77613575E710097BF31 /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F2A77413575E700097BF31 /* NSMutableAttributedString+HTML.m */; };
 		B23558F312E04C57005EA62F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B23558E212E04C3C005EA62F /* main.m */; };
 		B23558F712E04C8E005EA62F /* README.html in Resources */ = {isa = PBXBuildFile; fileRef = B23558E712E04C3C005EA62F /* README.html */; };
 		B235592712E05065005EA62F /* DemoSnippetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B235590212E04D1F005EA62F /* DemoSnippetsViewController.m */; };
@@ -153,6 +163,15 @@
 		A7EA581312E0C9010045411B /* DTTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTextAttachment.m; sourceTree = "<group>"; };
 		A7EA585612E0CE130045411B /* Image.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Image.html; sourceTree = "<group>"; };
 		A7EA5FAF12E1AC7F0045411B /* CurrentTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CurrentTest.html; sourceTree = "<group>"; };
+		A7F2A7381356F2E30097BF31 /* XB Niloofar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "XB Niloofar.ttf"; sourceTree = "<group>"; };
+		A7F2A73A1356F3950097BF31 /* CustomFont.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomFont.html; sourceTree = "<group>"; };
+		A7F2A73D1356F5720097BF31 /* XB NiloofarBd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "XB NiloofarBd.ttf"; sourceTree = "<group>"; };
+		A7F2A74313571E820097BF31 /* DTCoreTextParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCoreTextParagraphStyle.h; sourceTree = "<group>"; };
+		A7F2A74413571E820097BF31 /* DTCoreTextParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCoreTextParagraphStyle.m; sourceTree = "<group>"; };
+		A7F2A7471357227C0097BF31 /* DTHTMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTHTMLElement.h; sourceTree = "<group>"; };
+		A7F2A7481357227C0097BF31 /* DTHTMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTHTMLElement.m; sourceTree = "<group>"; };
+		A7F2A77313575E700097BF31 /* NSMutableAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+HTML.h"; sourceTree = "<group>"; };
+		A7F2A77413575E700097BF31 /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
 		B23558E012E04C3C005EA62F /* CoreTextExtensions_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextExtensions_Prefix.pch; sourceTree = "<group>"; };
 		B23558E112E04C3C005EA62F /* CoreTextExtensionsUnitTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextExtensionsUnitTest_Prefix.pch; sourceTree = "<group>"; };
 		B23558E212E04C3C005EA62F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -274,6 +293,8 @@
 				A7EA581312E0C9010045411B /* DTTextAttachment.m */,
 				A78A367212E23C56007CE622 /* NSCharacterSet+HTML.h */,
 				A78A367312E23C56007CE622 /* NSCharacterSet+HTML.m */,
+				A7F2A77313575E700097BF31 /* NSMutableAttributedString+HTML.h */,
+				A7F2A77413575E700097BF31 /* NSMutableAttributedString+HTML.m */,
 			);
 			name = "NSAttributedString HTML Additions";
 			sourceTree = "<group>";
@@ -319,6 +340,10 @@
 				A76FF95512EEA80D0065A4E7 /* DTCoreTextGlyphRun.m */,
 				A76F0DE812F0D72D0065A4E7 /* DTCoreTextFontDescriptor.h */,
 				A76F0DE712F0D72D0065A4E7 /* DTCoreTextFontDescriptor.m */,
+				A7F2A74313571E820097BF31 /* DTCoreTextParagraphStyle.h */,
+				A7F2A74413571E820097BF31 /* DTCoreTextParagraphStyle.m */,
+				A7F2A7471357227C0097BF31 /* DTHTMLElement.h */,
+				A7F2A7481357227C0097BF31 /* DTHTMLElement.m */,
 			);
 			name = "CoreText Layout";
 			sourceTree = "<group>";
@@ -336,6 +361,8 @@
 		B23558E312E04C3C005EA62F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A7F2A73D1356F5720097BF31 /* XB NiloofarBd.ttf */,
+				A7F2A7381356F2E30097BF31 /* XB Niloofar.ttf */,
 				A78455191344D53500D7E6EC /* WarAndPeace.html */,
 				A76F058B12EF500C0065A4E7 /* Icon.png */,
 				A76F058C12EF500C0065A4E7 /* Icon@2x.png */,
@@ -351,6 +378,7 @@
 				A76FF0E612ED652F0065A4E7 /* styles.html */,
 				A7EA5FAF12E1AC7F0045411B /* CurrentTest.html */,
 				A76F065112F0032A0065A4E7 /* Alignment.html */,
+				A7F2A73A1356F3950097BF31 /* CustomFont.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -426,6 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7F2A73C1356F4F30097BF31 /* CustomFont.html in Resources */,
 				B23558F712E04C8E005EA62F /* README.html in Resources */,
 				B235594412E05090005EA62F /* Snippets.plist in Resources */,
 				B235598C12E055BC005EA62F /* LoremIpsum.html in Resources */,
@@ -439,6 +468,8 @@
 				A76F058D12EF500C0065A4E7 /* Icon.png in Resources */,
 				A76F058E12EF500C0065A4E7 /* Icon@2x.png in Resources */,
 				A76F065212F0032A0065A4E7 /* Alignment.html in Resources */,
+				A7F2A7391356F2E30097BF31 /* XB Niloofar.ttf in Resources */,
+				A7F2A7401356F5720097BF31 /* XB NiloofarBd.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +487,7 @@
 				A7DBFC1312E9661E00F25897 /* CurrentTest.html in Resources */,
 				A7DBFC2012E9664400F25897 /* Snippets.plist in Resources */,
 				A784551A1344D53500D7E6EC /* WarAndPeace.html in Resources */,
+				A7F2A73B1356F3950097BF31 /* CustomFont.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +534,9 @@
 				A76FF79312EE00700065A4E7 /* DTCoreTextLayoutLine.m in Sources */,
 				A76FF95612EEA80D0065A4E7 /* DTCoreTextGlyphRun.m in Sources */,
 				A76F0DE912F0D72D0065A4E7 /* DTCoreTextFontDescriptor.m in Sources */,
+				A7F2A74613571E820097BF31 /* DTCoreTextParagraphStyle.m in Sources */,
+				A7F2A74A1357227C0097BF31 /* DTHTMLElement.m in Sources */,
+				A7F2A77613575E710097BF31 /* NSMutableAttributedString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +567,9 @@
 				A76F070E12F01B830065A4E7 /* DTCoreTextGlyphRun.m in Sources */,
 				A76F070F12F01B840065A4E7 /* DTCoreTextLayoutFrame.m in Sources */,
 				A76F0DEA12F0D72D0065A4E7 /* DTCoreTextFontDescriptor.m in Sources */,
+				A7F2A74513571E820097BF31 /* DTCoreTextParagraphStyle.m in Sources */,
+				A7F2A7491357227C0097BF31 /* DTHTMLElement.m in Sources */,
+				A7F2A77513575E710097BF31 /* NSMutableAttributedString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
